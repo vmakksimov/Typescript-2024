@@ -8,11 +8,11 @@ const daysOfWeek = (day: string): any => {
         Saturday,
         Sunday
     }
-    if (weekDays[day]=== undefined){
+    if (!weekDays[day]){
         return 'error'
     }
 
-    return weekDays[day]
+    return weekDays[day];
 }
 
-console.log(daysOfWeek('Friday'));
+console.log(daysOfWeek('Some'));

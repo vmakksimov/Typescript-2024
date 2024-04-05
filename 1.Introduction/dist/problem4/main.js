@@ -9,9 +9,10 @@ const daysOfWeek = (day) => {
         weekDays[weekDays["Saturday"] = 6] = "Saturday";
         weekDays[weekDays["Sunday"] = 7] = "Sunday";
     })(weekDays || (weekDays = {}));
-    if (weekDays[day] === undefined) {
+    if (!weekDays[day]) {
         return 'error';
     }
     return weekDays[day];
 };
-console.log(daysOfWeek('Friday'));
+console.log(daysOfWeek('Some'));
+//# sourceMappingURL=main.js.map

@@ -8,3 +8,4 @@ const sumOfNumbers = (n, m) => {
     return sumOfNumbers;
 };
 console.log(sumOfNumbers('-8', '20'));
+//# sourceMappingURL=main.js.map
