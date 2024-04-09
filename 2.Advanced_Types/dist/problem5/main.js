@@ -12,11 +12,6 @@ const townPopulation = (townsArray) => {
     });
     return towns;
 };
-// console.log(townPopulation(['Sofia <-> 1200000',
-// 'Montana <-> 20000',
-//  'New York <-> 10000000',
-//  'Washington <-> 2345000',
-// 'Las Vegas <-> 1000000']))
 const inputTowns = townPopulation(['Istanbul <-> 100000',
     'Honk Kong <-> 2100004',
     'Jerusalem <-> 2352344',

@@ -2,9 +2,9 @@ type TownPopulation = {
     [key: string]: number
 }
 
+
 const townPopulation = (townsArray: string[]): TownPopulation => {
     const towns: TownPopulation = {};
-
 
     townsArray.forEach(town => {
         let [townName, townPopulationStr] = town.split(' <-> ');
@@ -21,16 +21,6 @@ const townPopulation = (townsArray: string[]): TownPopulation => {
 
 
 }
-
-// console.log(townPopulation(['Sofia <-> 1200000',
-
-// 'Montana <-> 20000',
-
-//  'New York <-> 10000000',
-
-//  'Washington <-> 2345000',
-
-// 'Las Vegas <-> 1000000']))
 
 const inputTowns: TownPopulation = townPopulation(['Istanbul <-> 100000',
 
