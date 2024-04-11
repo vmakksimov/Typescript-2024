@@ -10,16 +10,16 @@ class Car {
     }
 
     // Setter for brand
-    set brand(brand: string) {
-        if (brand.length === 1) {
+    set brand(newValue: string) {
+        if (newValue.length === 1) {
             throw new Error("Brand must be longer than 1!");
         }
-        this._brand = brand;
+        this._brand = newValue
     }
 
     // Getter for brand
     get brand(): string {
-        return this._brand;
+        return this.brand;
     }
 
     // Setter for model
@@ -54,4 +54,6 @@ const [brand, model, horsepowerStr] = input.split(" ");
 const horsepower: number = parseInt(horsepowerStr);
 
 const car = new Car(brand, model, horsepower);
-car.printInfo();
+// car.printInfo();
+console.log(car.brand)
+console.log(car._brand)

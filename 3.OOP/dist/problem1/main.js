@@ -5,15 +5,15 @@ class Car {
         this.horsepower = horsepower; // Utilizing setter
     }
     // Setter for brand
-    set brand(brand) {
-        if (brand.length === 1) {
+    set brand(newValue) {
+        if (newValue.length === 1) {
             throw new Error("Brand must be longer than 1!");
         }
-        this._brand = brand;
+        this._brand = newValue;
     }
     // Getter for brand
     get brand() {
-        return this._brand;
+        return this.brand;
     }
     // Setter for model
     set model(model) {
@@ -41,5 +41,7 @@ const input = "Chevrolet Impala 390";
 const [brand, model, horsepowerStr] = input.split(" ");
 const horsepower = parseInt(horsepowerStr);
 const car = new Car(brand, model, horsepower);
-car.printInfo();
+// car.printInfo();
+console.log(car.brand);
+console.log(car._brand);
 //# sourceMappingURL=main.js.map
