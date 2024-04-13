@@ -113,7 +113,4 @@ for (const element of commands) {
    
     clientAccount.processCommands(element)
     
-    
-
-
 };
