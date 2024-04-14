@@ -31,7 +31,7 @@ class CarDealership<T> implements DealershipActions<T> {
     }
 
     showDetails(): string{
-        let result = `${this.dealershipName}\n`;
+        let result = `${this.dealershipName}:\n`;
 
         for (const car in this.modelSold){
             result += `${car} sold ${this.modelSold[car]}\n`

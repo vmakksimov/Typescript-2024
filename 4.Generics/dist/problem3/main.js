@@ -10,7 +10,7 @@ class CarDealership {
         return this.soldCars++;
     }
     showDetails() {
-        let result = `${this.dealershipName}\n`;
+        let result = `${this.dealershipName}:\n`;
         for (const car in this.modelSold) {
             result += `${car} sold ${this.modelSold[car]}\n`;
         }
