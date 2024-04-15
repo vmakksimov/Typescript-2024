@@ -6,7 +6,7 @@ class BankAccount {
     private _balance: number
     private _id: number
     private static _interest: number = 0.02
-    public static lastId: number = 0
+    private static lastId: number = 0
 
     constructor() {
         this._id = ++BankAccount.lastId;
@@ -112,5 +112,4 @@ const clientAccount = new TestClient();
 for (const element of commands) {
    
     clientAccount.processCommands(element)
-    
 };
