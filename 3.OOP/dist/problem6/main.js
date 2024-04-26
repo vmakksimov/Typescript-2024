@@ -12,14 +12,6 @@ class Pokemon {
         this.health = pokemonHealth;
     }
 }
-class Battleground {
-    constructor(tName, pName, pElement, pHealth) {
-        this.trainerName = tName;
-        this.pokemonName = pName;
-        this.pokemonElement = pElement;
-        this.pokemonHealth = pHealth;
-    }
-}
 function processInputStr(array) {
     const trainers = [];
     array.forEach(x => {
@@ -29,9 +21,9 @@ function processInputStr(array) {
             const pokHealt = parseInt(pokemonHealth);
             const trainer = new Trainer(trainerName);
             const pokemon = new Pokemon(pokemonName, pokemonElement, pokHealt);
-            // const instance = new Battleground(trainer, pokemon)
-            trainer.pokemons.push(pokemon);
-            trainers.push(trainer);
+            const currentName = trainer['name'];
+            const nameExists = trainers.find(x => x.name === currentName);
+            processTrainers(trainers, nameExists, trainerName, trainer, pokemon);
         }
         else {
             if (splitData[0] !== 'Tournament' && splitData[0] !== 'End') {
@@ -42,24 +34,40 @@ function processInputStr(array) {
                     }
                     else {
                         x.pokemons.map(x => x.health = x.health - 10);
-                        const belowZero = healthBelowZero(x);
+                        healthBelowZero(x.pokemons);
                     }
                 });
             }
-            // TODO commands
+        }
+    });
+    printOutput(trainers);
+}
+function processTrainers(trainers, nameExists, trainerName, trainer, pokemon) {
+    if (!nameExists) {
+        trainers.push(trainer);
+        trainer.pokemons.push(pokemon);
+    }
+    else {
+        trainers.map(trainer => trainer.name === trainerName && trainer.pokemons.push(pokemon));
+    }
+}
+function healthBelowZero(pokemons) {
+    pokemons.forEach(k => {
+        const health = k['health'];
+        if (health <= 0) {
+            const index = pokemons.indexOf(k);
+            pokemons.splice(index, 1);
         }
     });
 }
-function healthBelowZero(trainer) {
-    for (const pokemon in trainer.pokemons) {
-        // if (pokemons[pokemon] === 'health' && pokemons[pokemon] <= 0){
-        //     return true
-        // }
+function printOutput(trainers) {
+    const sortedTrainers = trainers.sort((a, b) => b.badges - a.badges);
+    for (const trainer of sortedTrainers) {
+        console.log(`${trainer.name} ${trainer.badges} ${trainer.pokemons.length}`);
     }
-    return false;
 }
-const inputStr1 = ['Peter Charizard Fire 100', 'George Squirtle Water 38', 'Peter Pikachu Electricity 10',
-    'Tournament', 'Fire', 'Electricity', 'End'
+const inputStr1 = ['Sam Blastoise Water 18', 'Narry Pikachu Electricity 22', 'John Kadabra Psychic 90',
+    'Tournament', 'Water', 'Electricity', 'Psychic', 'End'
 ];
 processInputStr(inputStr1);
 //# sourceMappingURL=main.js.map
