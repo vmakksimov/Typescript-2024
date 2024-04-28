@@ -45,24 +45,36 @@ const processInput = (inputData) => {
             departments[department].employees.push(employee);
         }
     });
-    calculateAveragePrice(Object.values(departments));
+    const highestDep = calculateAveragePrice(Object.values(departments));
+    let result = `Highest Average Salary: ${highestDep}\n`;
+    Object.values(departments).forEach(x => {
+        if (x.name === highestDep) {
+            Object.values(x.employees).sort((a, b) => b.salary - a.salary).forEach(x => {
+                result += `${x.name} ${x.salary} ${x.email} ${x.age}\n`;
+            });
+        }
+    });
+    return result.trim();
 };
 const calculateAveragePrice = (objects) => {
-    const highestSalary = {};
     let currentHighest = 0;
+    let currentHighestName = '';
     objects.forEach(x => {
-        let a = x;
         let highest = x.employees.reduce((acc, curr) => acc + curr.salary, 0);
-        if (highest > currentHighest) {
-            currentHighest = Number((highest / 2).toFixed(2));
+        if ((highest / x.employees.length) > currentHighest) {
+            currentHighest = (highest / x.employees.length);
+            currentHighestName = x.name;
         }
-        highestSalary[x.name] = currentHighest;
     });
+    return currentHighestName;
 };
-const inputData = ["4",
-    "Peter 120.00 Dev Development peter@abv.bg 28",
-    "Tina 333.33 Manager Marketing 33",
-    "Sam 840.20 ProjectLeader Development sam@sam.com",
-    "George 0.20 Freeloader Nowhere 18"];
-processInput(inputData);
+const inputData = ["6",
+    "Silver 496.37 Temp Coding silver@yahoo.com",
+    "Sam 610.13 Manager Sales",
+    "John 609.99 Manager Sales john@abv.bg 44",
+    "Venci 0.02 Director BeerDrinking beer@beer.br 23",
+    "Andre 700.00 Director Coding",
+    "Popeye 13.3333 Sailor SpinachGroup popeye@pop.ey"
+];
+console.log(processInput(inputData));
 //# sourceMappingURL=main.js.map

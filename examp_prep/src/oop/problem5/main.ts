@@ -33,7 +33,7 @@ class Employee {
     }
 }
 
-const processInput = (inputData: string[]) => {
+const processInput = (inputData: string[]): string => {
 
     const departments: { [key: string]: Departament} = {}
    
@@ -67,32 +67,49 @@ const processInput = (inputData: string[]) => {
 
     })
 
-    calculateAveragePrice(Object.values(departments))
-}
+    const highestDep = calculateAveragePrice(Object.values(departments))
+   
+    let result = `Highest Average Salary: ${highestDep}\n`
 
-const calculateAveragePrice = (objects: Departament[]) => {
-    const highestSalary: { [key: string]: number } = {}
-    let currentHighest: number = 0
-    objects.forEach(x => {
-        let a= x
-        let highest = x.employees.reduce((acc, curr) => acc + curr.salary, 0)
-        if (highest > currentHighest){
-            currentHighest = Number((highest / x.employees.length).toFixed(2))
+    Object.values(departments).forEach(x => {
+        if (x.name === highestDep){
+            Object.values(x.employees).sort((a, b) => b.salary - a.salary).forEach(x => {
+                result += `${x.name} ${x.salary} ${x.email} ${x.age}\n`
+            })
         }
-        highestSalary[x.name] = currentHighest
+       
     })
 
-
+    return result.trim();
 }
 
-const inputData: string[] = ["4",
+const calculateAveragePrice = (objects: Departament[]): string => {
+    let currentHighest: number = 0
+    let currentHighestName: string = ''
+    objects.forEach(x => {
+        let highest = x.employees.reduce((acc, curr) => acc + curr.salary, 0)
+        if ((highest / x.employees.length) > currentHighest){
+            currentHighest = (highest / x.employees.length)
+            currentHighestName = x.name
+        }
+        
+    })
 
-    "Peter 120.00 Dev Development peter@abv.bg 28",
+    return currentHighestName
+}
 
-    "Tina 333.33 Manager Marketing 33",
+const inputData: string[] = ["6",
 
-    "Sam 840.20 ProjectLeader Development sam@sam.com",
+    "Silver 496.37 Temp Coding silver@yahoo.com",
 
-    "George 0.20 Freeloader Nowhere 18"]
+    "Sam 610.13 Manager Sales",
 
-processInput(inputData)
+    "John 609.99 Manager Sales john@abv.bg 44",
+
+    "Venci 0.02 Director BeerDrinking beer@beer.br 23",
+    "Andre 700.00 Director Coding",
+
+    "Popeye 13.3333 Sailor SpinachGroup popeye@pop.ey"
+]
+
+console.log(processInput(inputData))
