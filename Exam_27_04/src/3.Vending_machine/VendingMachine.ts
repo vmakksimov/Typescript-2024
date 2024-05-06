@@ -59,7 +59,7 @@ export class VendingMachine {
         return 'No drinks available.'
     }   
     
-    get getCount(): number {
+    getCount(): number {
         return this.drinks.length;
     }
 
